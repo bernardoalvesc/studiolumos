@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lumos Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        roxo: {
+                            claro: '#E5D9FF',
+                            escuro: '#4B3F72',
+                            hover: '#6B57A3'
+                        },
+                    },
+                    fontFamily: {
+                        'fancy': ['Segoe UI', 'sans-serif'],
+                    },
+                    keyframes: {
+                        sino_kf: {
+                            '0%, 100%': { transform: 'rotate(-10deg)' },
+                            '50%': { transform: 'rotate(10deg)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    },
+                    animation: {
+                        sino: 'sino_kf 0.31s ease-in-out infinite',
+                        fadeIn: 'fadeIn 0.5s ease-in-out'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-roxo-claro dark:bg-gray-900 font-fancy flex flex-col justify-center items-center min-h-screen transition-colors duration-300">
+    <div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg w-3/4 max-w-md text-center animate-fadeIn">
+            <h2 class="text-2xl font-bold mb-4 text-roxo-escuro dark:text-roxo-claro">Bem-vindo ao Lumos Studio!</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">Estamos aqui para elevar seu conceito ao próximo nível.</p>
+            <button onclick="closeModal()" class="bg-roxo-escuro text-white px-4 py-2 rounded-full hover:bg-roxo-hover transition">Começar</button>
+        </div>
+    </div>
+
+    <main class="flex px-6 drop-shadow-2xl lg:w-3/4 flex-1 my-8">
+        <section class="bg-roxo-escuro hidden lg:flex w-1/2 rounded-l-lg justify-center items-center">
+            <img class="p-6" src="lumos.png" alt="ícone do estúdio">      
+        </section>
+
+        <section class="bg-white dark:bg-gray-800 p-10 gap-6 flex flex-col rounded-lg lg:w-1/2 justify-center lg:rounded-l-none">
+            <div class="self-center relative group">
+                <svg class="fill-roxo-escuro absolute top-0 left-1 opacity-0 group-hover:opacity-100 group-hover:animate-ping flex items-center justify-center" 
+                width="35" height="20" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" fill="none"/>
+                </svg>
+                <svg class="w-12 h-12 fill-gradient stroke-roxo-escuro group-hover:animate-sino" viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4B3F72; stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6B57A3; stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M32 8C30 8 28 10 28 12H36C36 10 34 8 32 8Z" fill="url(#gradient)"/>
+                    <path d="M20 12C20 8 28 6 32 6C36 6 44 8 44 12V24C44 28 40 32 36 32H28C24 32 20 28 20 24V12Z" fill="url(#gradient)" />
+                    <path d="M16 24H48V34C48 36 46 38 44 38H20C18 38 16 36 16 34V24Z" fill="url(#gradient)"/>
+                    <rect x="28" y="38" width="8" height="4" fill="roxo-escuro" />
+                    <rect x="31" y="8" width="2" height="6" fill="roxo-escuro" />
+                </svg>
+            </div>
+            
+            <div class="text-center">
+                <h1 class="text-4xl mb-2 text-roxo-escuro dark:text-roxo-claro">Lumos Studio</h1>
+                <p class="text-xl text-gray-700 dark:text-gray-300 mb-2">Elevando seu conceito ao próximo nível</p>
+            </div>
+
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="nome">Nome</label>
+                    <input class="text-sm w-full mb-1 pl-3 rounded border py-2 shadow focus:outline-none hover:border-roxo-claro hover:ring-1 hover:ring-roxo-escuro focus:border-roxo-escuro focus:ring-1 focus:ring-roxo-escuro dark:bg-gray-700 dark:text-white dark:border-gray-600" id="nome" type="text" placeholder="Digite seu nome" required>
+                    <p class="text-red-500 text-xs italic hidden" id="nomeError">Por favor, preencha o nome.</p>
+                </div>
+
+                <div>
+                    <label class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="email">Email</label>
+                    <input class="text-sm w-full mb-1 pl-3 rounded border py-2 shadow focus:outline-none hover:border-roxo-claro hover:ring-1 hover:ring-roxo-escuro focus:border-roxo-escuro focus:ring-1 focus:ring-roxo-escuro dark:bg-gray-700 dark:text-white dark:border-gray-600" id="email" type="email" placeholder="Digite seu endereço de email" required>
+                    <p class="text-red-500 text-xs italic hidden" id="emailError">Por favor, insira um email válido.</p>
+                </div>
+
+                <div>
+                    <label class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="phone">Telefone</label>
+                    <input id="phone" type="tel" placeholder="Digite seu telefone" class="text-sm w-full mb-1 pl-3 rounded border py-2 shadow focus:outline-none hover:border-roxo-claro hover:ring-1 hover:ring-roxo-escuro focus:border-roxo-escuro focus:ring-1 focus:ring-roxo-escuro dark:bg-gray-700 dark:text-white dark:border-gray-600" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                    <p class="text-red-500 text-xs italic hidden" id="phoneError">Por favor, insira um número de telefone válido.</p>
+                </div>
+
+                <div>
+                    <label class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" for="mensagem">Mensagem</label>
+                    <textarea class="text-sm w-full mb-1 pl-3 rounded border py-2 shadow focus:outline-none hover:border-roxo-claro hover:ring-1 hover:ring-roxo-escuro focus:border-roxo-escuro focus:ring-1 focus:ring-roxo-escuro dark:bg-gray-700 dark:text-white dark:border-gray-600" id="mensagem" rows="4" placeholder="Escreva sua mensagem" required></textarea>
+                    <p class="text-gray-500 text-xs italic" id="charCount">0 / 500 caracteres</p>
+                    <p class="text-red-500 text-xs italic hidden" id="mensagemError">Por favor, escreva uma mensagem.</p>
+                </div>
+
+                <button id="submitBtn" class="font-bold text-white bg-roxo-escuro w-full py-2 rounded-full shadow-2xl hover:bg-roxo-hover duration-150 disabled:opacity-50 disabled:cursor-not-allowed" type="submit">Enviar Mensagem</button>
+            </form>
+
+            <div id="successMessage" class="hidden text-green-500 text-center font-bold">
+                Mensagem enviada com sucesso!
+            </div>
+        </section>
+    </main>
+
+    <button id="darkModeToggle" class="fixed bottom-4 right-4 bg-roxo-escuro text-white p-2 rounded-full shadow-lg hover:bg-roxo-hover transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </button>
+
+    <button id="floatingActionButton" class="fixed bottom-4 left-4 bg-roxo-escuro text-white p-4 rounded-full shadow-lg hover:bg-roxo-hover transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+    </button>
+
+    <script>
+        function closeModal() {
+            document.getElementById("welcomeModal").style.display = "none";
+        }
+
+        // Auto-close welcome modal after 5 seconds
+        setTimeout(closeModal, 5000);
+
+        // Form validation and submission
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'Enviando...';
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Enviar Mensagem';
+                    successMessage.classList.remove('hidden');
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                    }, 3000);
+                }, 2000);
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+            const nome = document.getElementById('nome');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const mensagem = document.getElementById('mensagem');
+
+            if (nome.value.trim() === '') {
+                document.getElementById('nomeError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('nomeError').classList.add('hidden');
+            }
+
+            if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('emailError').classList.add('hidden');
+            }
+
+            if (phone.value.length < 10) {
+                document.getElementById('phoneError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('phoneError').classList.add('hidden');
+            }
+
+            if (mensagem.value.trim() === '') {
+                document.getElementById('mensagemError').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('mensagemError').classList.add('hidden');
+            }
+
+            return isValid;
+        }
+
+        // Character count for message
+        const mensagem = document.getElementById('mensagem');
+        const charCount = document.getElementById('charCount');
+
+        mensagem.addEventListener('input', function() {
+            const remaining = 500 - this.value.length;
+            charCount.textContent = `${this.value.length} / 500 caracteres`;
+            if (remaining < 0) {
+                this.value = this.value.slice(0, 500);
+                charCount.textContent = '500 / 500 caracteres';
+            }
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Floating Action Button
+        const floatingActionButton = document.getElementById('floatingActionButton');
+        floatingActionButton.addEventListener('click', () => {
+            document.getElementById('nome').focus();
+        });
+    </script>
+</body>
+</html>
+
+
+
