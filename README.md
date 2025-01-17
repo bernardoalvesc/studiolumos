@@ -8,7 +8,6 @@ Este é um projeto de uma landing page responsiva desenvolvida com TailwindCSS p
 
 - Sobre
 - Tecnologias Utilizadas
-- Estrutura do Projeto
 - Funcionalidades
 - Contato
 
